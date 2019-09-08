@@ -1,0 +1,117 @@
+Create New User:
+
+mutation createUser {
+  createUser(name: "ved", email: "vedpra@gmail.com", role: Supervisor) {
+      name,
+      email,
+      role
+    }
+}
+
+--------------------------------------------------------
+
+Get All Users:
+{
+    users {
+     name,
+      email,
+      role     
+    }
+}
+
+---------------------------------------------------------
+
+1 - Raise (create) an incident and assign it to a user with an Engineer role
+
+mutation createIncident {
+  createIncident(title: "databackup", description: "take a data backup", assignee: "None", status: Created) {
+        title,
+        description,
+        assignee,
+        status     
+    }
+}
+
+
+Check created Incident:
+
+{
+    incidents {
+        title,
+        assignee,
+        description,
+        status,
+   
+    }
+}
+
+---------------------------------------------
+2 - Assign the incident to a user
+
+mutation {
+  assignIncident(title: "databackup", email: "vedpra@gmail.com") {
+    ok,
+    nModified
+  }
+}
+
+----------------------------------------------
+3 - Acknowledge the incident
+
+mutation {
+  changeIncidentStatus(title: "databackup", status: Acknowledged) {
+   ok,
+   nModified
+  }
+}
+
+-----------------------------------------------
+4 - Resolve the incident
+
+mutation {
+  changeIncidentStatus(title: "databackup", status: Resolved) {
+   ok,
+   nModified
+  }
+}
+
+------------------------------------------------
+5 - Read details about a certain incident
+
+{
+  getIncident(title: "databackup") {
+    title,
+    description,
+    assignee,
+    status,
+    createdAt,
+    updatedAt
+  }
+}
+
+-------------------------------------------------
+6 - Delete an incident
+
+{
+    incidents {
+        title,
+        assignee,
+        description,
+        status,
+   
+    }
+}
+
+--------------------------------------------------
+7 - This includes filtering by fields, sorting by the date of creation and update and pagination
+
+{
+    incidents(limit: 10, sortBy: "title", sortOrder: -1, search: "databackup") {
+        title,
+        assignee,
+        description,
+        status,
+        createdAt,
+        updatedAt   
+    }
+}
