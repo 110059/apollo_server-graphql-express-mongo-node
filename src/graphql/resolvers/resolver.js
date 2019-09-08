@@ -28,7 +28,7 @@ const resolvers = {
         try {
           let usr = await UserModel.findOne({ "role": "Engineer" }).exec();
           if(usr) {
-            args.assignee = usr.email;
+            args.assignee = usr._id;
             let response = await IncidentModel.create(args);
             return response;
           } else {
@@ -52,7 +52,7 @@ const resolvers = {
           let usr = await UserModel.findOne({ email }).exec();
           if (usr) {
             response = await IncidentModel.updateOne({ title },
-              { $set: { assignee: usr.email } }
+              { $set: { assignee: usr._id } }, { new: true }
             )
             return response;
           }
@@ -63,7 +63,7 @@ const resolvers = {
       changeIncidentStatus: async (_, { title, status }) => {
         try {
           response = await IncidentModel.updateOne({ title },
-            { $set: { status } }
+            { $set: { status } }, { new: true }
           )
           return response;
         } catch (e) {

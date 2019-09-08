@@ -3,5 +3,4 @@ server:
   host: localhost
 
 db:
-  #uri: 'mongodb://localhost:27017/graphql-apollo'
-  uri: 'mongodb://localhost:27020/incident-management'
+  uri: 'mongodb://localhost:27017/incident-management'

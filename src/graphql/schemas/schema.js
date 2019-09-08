@@ -3,19 +3,23 @@ const { UserModel, IncidentModel } = require('../../models');
 
 const typeDefs = gql`
   type IncidentType {
+    _id: String!
     title: String!
     description: String
     assignee: String!
     status: Status,
-    createdAt: String!
-    updatedAt: String!
+    createdAt: String
+    updatedAt: String
   }
 
   type UserType {
+    _id: String
     name: String!
     email: String!
     role: Role!
     incidents: [IncidentType]
+    createdAt: String
+    updatedAt: String
   }
 
   enum Status {
